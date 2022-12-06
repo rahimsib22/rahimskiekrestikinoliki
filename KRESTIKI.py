@@ -35,7 +35,7 @@ def draw_table():
     for i in range(0, s_y+1):
         canvas.create_line(i*step_y,0,i*step_y,size_canvas_y,)
 
-points = []
+points = [[-1,-1,-1], [-1,-1,-1], [-1,-1,-1]]
 draw_table()
 
 class Point:
@@ -64,13 +64,17 @@ def draw_point(x, y, type):
 
 
 def add_to_points(event):
-    print(event.num, event.x, event.y)
+    #print(event.num, event.x, event.y)
     type = 0
     if event.num == 3:
         type = 1
-    points.append(Point(event.x // step_x, event.y // step_y, type))
-    draw_point(event.x // step_x, event.y // step_y, type)
-    print(" ", join(map(str, points)))
+
+
+    if     points[event.x // step_x][event.y // step_y] == -1:
+        points[event.x // step_x][event.y // step_y] = type
+        draw_point(event.x // step_x, event.y // step_y, type)
+
+    #print(" ", join(map(str, points)))
 
 canvas.bind_all("<Button-1>", add_to_points) #ЛKM
 canvas.bind_all("<Button-3>", add_to_points) #ПKM
