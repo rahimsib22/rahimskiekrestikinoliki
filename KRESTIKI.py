@@ -29,8 +29,10 @@ s_y = 3
 step_x = size_canvas_x // s_x
 step_y = size_canvas_y // s_y
 def draw_table():
-    for i in range(0, s_x):
+    for i in range(0, s_x+1):
         canvas.create_line(0,i*step_y,size_canvas_x,i*step_y)
+    for i in range(0, s_y+1):
+        canvas.create_line(i*step_y,0,i*step_y,size_canvas_y,)
 
 draw_table()
 
