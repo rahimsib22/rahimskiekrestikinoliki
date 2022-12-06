@@ -21,6 +21,7 @@ tk.title("Крестики нолики от Рахима(пожалуста м�
 tk.resizable(0, 0)
 tk.wm_attributes("-topmost", 1)
 canvas = Canvas(tk, width=size_canvas_x, height=size_canvas_y, bd=0, highlightthickness=0)
+canvas.create_rectangle(0,0, size_canvas_x, size_canvas_y, fill = "white")
 canvas.pack()
 tk.update()
 
@@ -49,11 +50,15 @@ class Point:
 def draw_point(x, y, type):
     size = 25
     color = "black"
-    if type == 3:
+    id = 0
+    if type == 0:
         color = "red"
+        id = canvas.create_oval(x * step_x, y * step_y, x * step_x + step_x, y * step_y + step_x, fill=color)
+        id = canvas.create_oval(x * step_x+size, y * step_y+size, x * step_x + step_x-size, y * step_y + step_x-size, fill='white')
     if type == 1:
         color = "blue"
-    id = canvas.create_oval(x*step_x, y*step_y, x*step_x+step_x, y*step_y+step_x, fill=color)
+    #id = canvas.create_oval(x*step_x, y*step_y, x*step_x+step_x, y*step_y+step_x, fill=color)
+
 
 
 
