@@ -54,10 +54,11 @@ def draw_point(x, y, type):
     if type == 0:
         color = "red"
         id = canvas.create_oval(x * step_x, y * step_y, x * step_x + step_x, y * step_y + step_x, fill=color)
-        id = canvas.create_oval(x * step_x+size, y * step_y+size, x * step_x + step_x-size, y * step_y + step_x-size, fill='white')
+        id2 = canvas.create_oval(x * step_x + size, y * step_y + size, x * step_x + step_x - size, y * step_y + step_y - size, fill="white")
     if type == 1:
         color = "blue"
-    #id = canvas.create_oval(x*step_x, y*step_y, x*step_x+step_x, y*step_y+step_x, fill=color)
+        id = canvas.create_rectangle(x * step_x, y * step_y + step_y // 2 - step_y // 10, x * step_x + step_x, y * step_y + step_y // 2 + step_y // 10, fill=color)
+        id2 = canvas.create_rectangle(x * step_x + step_x // 2 - step_x // 10, y * step_y, x * step_x + step_x // 2 + step_x // 10, y * step_y + step_y, fill=color)
 
 
 
