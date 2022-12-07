@@ -36,6 +36,9 @@ def draw_table():
         canvas.create_line(i*step_y,0,i*step_y,size_canvas_y,)
 
 points = [[-1,-1,-1], [-1,-1,-1], [-1,-1,-1]]
+list_ids = []
+
+
 draw_table()
 
 class Point:
@@ -55,11 +58,14 @@ def draw_point(x, y, type):
         color = "red"
         id = canvas.create_oval(x * step_x, y * step_y, x * step_x + step_x, y * step_y + step_x, fill=color)
         id2 = canvas.create_oval(x * step_x + size, y * step_y + size, x * step_x + step_x - size, y * step_y + step_y - size, fill="white")
+        list_ids.append(id)
+        list_ids.append(id2)
     if type == 1:
         color = "blue"
         id = canvas.create_rectangle(x * step_x, y * step_y + step_y // 2 - step_y // 10, x * step_x + step_x, y * step_y + step_y // 2 + step_y // 10, fill=color)
         id2 = canvas.create_rectangle(x * step_x + step_x // 2 - step_x // 10, y * step_y, x * step_x + step_x // 2 + step_x // 10, y * step_y + step_y, fill=color)
-
+        list_ids.append(id)
+        list_ids.append(id2)
 
 
 
@@ -79,8 +85,17 @@ def add_to_points(event):
 canvas.bind_all("<Button-1>", add_to_points) #ЛKM
 canvas.bind_all("<Button-3>", add_to_points) #ПKM
 
+def button_press():
+    global list_ids
+
+    for i in list_ids:
+        canvas.delete(i)
+    list_ids = []
+    print(list_ids)
 
 
+b1 = Button(tk, text="заново", command=button_press)
+b1.pack()
 
 while app_running:
     if app_running:
