@@ -7,8 +7,8 @@ import random
 tk = Tk()
 app_running = True
 
-size_canvas_x = 768
-size_canvas_y = 768
+size_canvas_x = 500
+size_canvas_y = 500
 
 def on_clothing():
     global app_running
@@ -70,7 +70,7 @@ def draw_point(x, y, type):
 
 
 def add_to_points(event):
-    #print(event.num, event.x, event.y)
+    global points
     type = 0
     if event.num == 3:
         type = 1
@@ -79,23 +79,60 @@ def add_to_points(event):
     if     points[event.x // step_x][event.y // step_y] == -1:
         points[event.x // step_x][event.y // step_y] = type
         draw_point(event.x // step_x, event.y // step_y, type)
+        if check_winner(type):
+            print("Победитель", type)
+            points = [[10, 10, 10], [10, 10, 10], [10, 10, 10]]
 
-    #print(" ", join(map(str, points)))
 
 canvas.bind_all("<Button-1>", add_to_points) #ЛKM
 canvas.bind_all("<Button-3>", add_to_points) #ПKM
 
 def button_press():
     global list_ids
-
+    global points
     for i in list_ids:
         canvas.delete(i)
     list_ids = []
     print(list_ids)
+    points = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]]
 
 
 b1 = Button(tk, text="заново", command=button_press)
 b1.pack()
+
+
+def check_winner(who):
+#по строкам
+    for j in range (0,s_y):
+        win = True
+        for i in range(0,s_x):
+            if points[j][i] !=who:
+                win = False
+        if win:
+            return True
+
+#по вертикалем
+    for j in range (0,s_y):
+        win = True
+        for i in range(0,s_x):
+            if points[i][j] !=who:
+                win = False
+        if win:
+            return True
+
+#по диагонале
+    win = True
+    for i in range (0,s_y):
+        print(points[i][i])
+        if points[i][i] !=who:
+            win = False
+    if win:
+        return True
+
+
+
+
+
 
 while app_running:
     if app_running:
